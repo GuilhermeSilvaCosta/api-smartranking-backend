@@ -14,6 +14,7 @@ import { CreatePlayerDto } from './dtos/create-player.dto';
 import { PlayersService } from './players.service';
 import { Player } from './interfaces/player.interface';
 import { PlayersValidationParamsPipe } from './pipes/players-validation-params.pipe';
+import { UpdatePlayerDto } from './dtos/update-player.dto';
 
 @Controller('api/v1/players')
 export class PlayersController {
@@ -28,11 +29,12 @@ export class PlayersController {
   }
 
   @Put('/:id')
+  @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
   async updatePlayer(
-    @Body() createPlayerDto: CreatePlayerDto,
+    @Body() updatePlayerDto: UpdatePlayerDto,
     @Param('id') id: string,
   ): Promise<Player> {
-    return this.playersService.updatePlayer(id, createPlayerDto);
+    return this.playersService.updatePlayer(id, updatePlayerDto);
   }
 
   @Get()
@@ -44,6 +46,6 @@ export class PlayersController {
 
   @Delete('/:id')
   async removePlayer(@Param('id') id: string): Promise<void> {
-    this.playersService.removePlayer(id);
+    await this.playersService.removePlayer(id);
   }
 }

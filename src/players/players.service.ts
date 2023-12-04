@@ -3,6 +3,7 @@ import { CreatePlayerDto } from './dtos/create-player.dto';
 import { Player } from './interfaces/player.interface';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { UpdatePlayerDto } from './dtos/update-player.dto';
 
 @Injectable()
 export class PlayersService {
@@ -18,11 +19,11 @@ export class PlayersService {
 
   async updatePlayer(
     id: string,
-    createPlayerDto: CreatePlayerDto,
+    updatePlayerDto: UpdatePlayerDto,
   ): Promise<Player> {
     const result = await this.playerModel.findByIdAndUpdate(
       id,
-      createPlayerDto,
+      updatePlayerDto,
       {
         new: true,
       },
@@ -38,6 +39,7 @@ export class PlayersService {
   }
 
   async removePlayer(id: string): Promise<void> {
-    await this.playerModel.findByIdAndDelete(id);
+    const result = await this.playerModel.findByIdAndDelete(id);
+    if (!result) throw new NotFoundException('Player id not found');
   }
 }
