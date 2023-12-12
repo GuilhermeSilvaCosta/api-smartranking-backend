@@ -33,6 +33,14 @@ export class PlayersService {
     return result;
   }
 
+  async getById(id: string) {
+    const result = await this.playerModel.findById(id).exec();
+
+    if (!result) throw new NotFoundException('Player id not found');
+
+    return result;
+  }
+
   async searchPlayers(email: string): Promise<Player[]> {
     const query = email ? { email } : {};
     return this.playerModel.find(query).exec();

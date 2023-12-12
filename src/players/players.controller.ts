@@ -44,6 +44,11 @@ export class PlayersController {
     return this.playersService.searchPlayers(email);
   }
 
+  @Get('/:id')
+  getById(@Param('id') id: string): Promise<Player> {
+    return this.playersService.getById(id);
+  }
+
   @Delete('/:id')
   async removePlayer(@Param('id') id: string): Promise<void> {
     await this.playersService.removePlayer(id);
