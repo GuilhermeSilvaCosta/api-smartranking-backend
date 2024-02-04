@@ -4,7 +4,7 @@ import { Result } from '../interfaces/challenge.interface';
 
 export class AssingChallengeMatchDto {
   @IsNotEmpty()
-  def: Player;
+  winner: Player;
 
   @IsNotEmpty()
   result: Array<Result>;

@@ -9,7 +9,7 @@ export const MatchSchema = new Schema(
         ref: 'Player',
       },
     ],
-    def: { type: Schema.Types.ObjectId, ref: 'Player' },
+    winner: { type: Schema.Types.ObjectId, ref: 'Player' },
     result: [
       {
         set: String,

@@ -5,10 +5,14 @@ import { ChallengeSchema } from './interfaces/challenge.schema';
 import { ChallengesService } from './challenges.service';
 import { PlayersModule } from 'src/players/players.module';
 import { CategoriesModule } from 'src/categories/categories.module';
+import { MatchSchema } from './interfaces/match.schema';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: 'Challenge', schema: ChallengeSchema }]),
+    MongooseModule.forFeature([
+      { name: 'Challenge', schema: ChallengeSchema },
+      { name: 'Match', schema: MatchSchema },
+    ]),
     PlayersModule,
     CategoriesModule,
   ],
